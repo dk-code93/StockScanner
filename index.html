@@ -25,7 +25,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css"
       rel="stylesheet"
     />
-    <link href="./assets/style.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="./assets/style.css">
   </head>
   <body>
 
@@ -54,7 +54,7 @@
         </nav>
 
         <!-- Search Form -->
-        <form class="form-inline ">
+        <form class="form-inline">
           <input id="searchInput" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
           <button id="searchBtn" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
@@ -82,6 +82,19 @@
                 <h3 class="card-header bg-success">
                   Stock 1
                 </h3>
+              <div class="card-header">
+                <ul class="nav nav-tabs card-header-tabs">
+                  <li class="nav-item">
+                    <a class="nav-link active" href="#">Active</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link disabled" href="#">Disabled</a>
+                  </li>
+                </ul>
+              </div>
                 <div class="card-body">
                   <p class="card-text">
                     Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quo accusantium dolor at, blanditiis rem
@@ -98,6 +111,19 @@
                 <h3 class="card-header bg-warning">
                   Stock 2
                 </h3>
+                <div class="card-header">
+                  <ul class="nav nav-tabs card-header-tabs">
+                    <li class="nav-item">
+                      <a class="nav-link active" href="#">Active</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link disabled" href="#">Disabled</a>
+                    </li>
+                  </ul>
+                </div>
                 <div class="card-body">
                   <p class="card-text">
                     Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quo accusantium dolor at, blanditiis rem
@@ -119,10 +145,10 @@
       <!-- 'Company' Details -->
       <div class="col-12 col-sm-6 col-md-4">
         <address>
-          <h2>Cool Company, Inc.</h2>
+          <h2>Lorem, ipsum dolor.</h2>
 
           <h5>
-            Call us at <a href="tel:555.555.5555"></a>555.555.5555</a>
+            Call us at <a href="tel:8675309"></a>8675309</a>
           </h5>
 
           <h5>
