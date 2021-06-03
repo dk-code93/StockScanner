@@ -27,45 +27,38 @@
     />
   </head>
   <body>
-      <!-- Bootstrap uses color utility classes to set colors for text and background colors -->
+
+
   <header class="jumbotron jumbotron-fluid bg-dark text-light">
     <div class="container">
-      <!-- Use align-items utilities on flexbox containers to align to start, end, center, baseline, or stretch -->
       <div class="row align-items-end">
         <div class="col-12 col-md-6">
           <h1>Stock Scanner</h1>
-          <ul class="nav nav-pills">
-            <li class="nav-item mr-2">
-              <a class="nav-link active" href="#">Active</a>
-            </li>
-            <li class="nav-item mx-2">
-              <a class="nav-link active" href="#">Link</a>
-            </li>
-            <li class="nav-item mx-2">
-              <a class="nav-link active" href="#">Link</a>
-            </li>
-            <li class="nav-item mx-2">
-              <a class="nav-link active" href="#">Disabled</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="row justify-content-end">
-        <div class="col-12 col-md-6">
-        <form>
-          <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
+            <ul class="nav nav-pills">
+              <li class="nav-item mr-2">
+                <a class="nav-link active" href="#">Active</a>
+              </li>
+              <li class="nav-item mx-2">
+                <a class="nav-link active" href="#">Link</a>
+              </li>
+              <li class="nav-item mx-2">
+                <a class="nav-link active" href="#">Link</a>
+              </li>
+              <li class="nav-item mx-2">
+                <a class="nav-link active" href="#">Disabled</a>
+              </li>
+            </ul>
+         </div>       
+         <form class="form-inline ml-auto">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
-        </div>
-      </div>
+      </div>          
     </div>
   </header>
 
   <main class="container">
-    <!-- Bootstrap spacing utilities use m- for margin and p- for padding --> 
-
     <div class="row">
-
         <div class="col-8">
             <h2>Live Stocks</h2>
             <div class="jumbotron"></div>
@@ -73,7 +66,7 @@
         
         <section class="col-4" id="cards">
 
-              <div class="card">
+              <div class="card mb-3">
                 <h3 class="card-header bg-success">
                   Stock 1
                 </h3>
@@ -107,8 +100,6 @@
         </section>
 
     </div>
-    <!-- Use justify-content utilities to change alignment of flex items on the main axis -->
-        
     <hr />
 
     <section class="row justify-content-center my-4">
