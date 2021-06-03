@@ -29,42 +29,53 @@
   </head>
   <body>
 
-
   <header class="jumbotron jumbotron-fluid bg-dark text-light">
-    <div class="container">
-      <div class="row align-items-end">
-        <div class="col-12 col-md-6">
+
+    <!-- Container for header  -->
+    <div class="row d-flex justify-content-around">
+
+        <!-- Nav Buttons and title -->
+        <nav>
           <h1>Stock Scanner</h1>
-            <ul class="nav nav-pills">
-              <li class="nav-item mr-2">
-                <a class="nav-link active" href="#">Active</a>
-              </li>
-              <li class="nav-item mx-2">
-                <a class="nav-link active" href="#">Link</a>
-              </li>
-              <li class="nav-item mx-2">
-                <a class="nav-link active" href="#">Link</a>
-              </li>
-              <li class="nav-item mx-2">
-                <a class="nav-link active" href="#">Disabled</a>
-              </li>
-            </ul>
-         </div>       
-         <form class="form-inline ml-auto">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          <ul class="nav nav-pills">
+            <li class="nav-item mr-2">
+              <a class="nav-link active" href="#">Active</a>
+            </li>
+            <li class="nav-item mx-2">
+              <a class="nav-link active" href="#">Link</a>
+            </li>
+            <li class="nav-item mx-2">
+              <a class="nav-link active" href="#">Link</a>
+            </li>
+            <li class="nav-item mx-2">
+              <a class="nav-link active" href="#">Disabled</a>
+            </li>
+          </ul>
+        </nav>
+
+        <!-- Search Form -->
+        <form class="form-inline">
+          <input id="searchInput" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button id="searchBtn" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
-      </div>          
+
     </div>
+    
   </header>
 
+  <!-- ljower area -->
   <main class="container">
+
+    <!-- Row containing search results and active selection  -->
     <div class="row">
+
+        <!-- Active selection window -->
         <div class="col-8">
             <h2>Live Stocks</h2>
             <div class="jumbotron"></div>
         </div>
-        
+
+        <!-- Container for stock list -->
         <section class="col-4" id="cards">
 
               <div class="card mb-3">
@@ -129,8 +140,9 @@
     </div>
     <hr />
 
-    <section class="row justify-content-center my-4">
+    <footer class="row justify-content-center my-4">
 
+      <!-- 'Company' Details -->
       <div class="col-12 col-sm-6 col-md-4">
         <address>
           <h2>Lorem, ipsum dolor.</h2>
@@ -145,6 +157,8 @@
 
         </address>
       </div>
+
+      <!-- Footer form -->
       <div class="col-12 col-sm-6 col-md-4">
         <h2>Leave a Comment</h2>
         <form>
@@ -160,7 +174,7 @@
         </form>
       </div>
 
-    </section>
+    </footer>
 
   </main>
   </body>
