@@ -25,14 +25,18 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css"
       rel="stylesheet"
     />
+    <link href="./assets/style.css" rel="stylesheet"/>
   </head>
   <body>
-      <!-- Bootstrap uses color utility classes to set colors for text and background colors -->
+
+  <!-- header + navbar -->
   <header class="jumbotron jumbotron-fluid bg-dark text-light">
-    <div class="container">
-      <!-- Use align-items utilities on flexbox containers to align to start, end, center, baseline, or stretch -->
-      <div class="row align-items-end">
-        <div class="col-12 col-md-6">
+    
+    <!-- Container for navbar elements -->
+    <div class="row d-flex justify-content-around">
+
+      <!-- Nav Buttons -->
+      <div id="navbar">
           <h1>Stock Scanner</h1>
           <ul class="nav nav-pills">
             <li class="nav-item mr-2">
@@ -48,31 +52,35 @@
               <a class="nav-link active" href="#">Disabled</a>
             </li>
           </ul>
-        </div>
       </div>
-      <div class="row justify-content-end">
-        <div class="col-12 col-md-6">
-        <form>
-          <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-        </div>
-      </div>
+
+      <!-- Search field -->
+      <form id="searchForm">
+        <input class="form-control w-20" type="search" placeholder="Search" aria-label="Search" id="searchInput" >
+        <button class="btn btn-outline-success" type="submit" id="searchBtn">Search</button>
+      </form>
+
+
     </div>
+    
   </header>
 
+  <!-- White Lower area -->
   <main class="container">
-    <!-- Bootstrap spacing utilities use m- for margin and p- for padding --> 
 
+    <!-- Row containing search results and active selection  -->
     <div class="row">
 
+        <!-- Active selection window -->
         <div class="col-8">
             <h2>Live Stocks</h2>
             <div class="jumbotron"></div>
         </div>
-        
+
+        <!-- Container for stock list -->
         <section class="col-4" id="cards">
 
+              <!-- Search results will appear here -->
               <div class="card">
                 <h3 class="card-header bg-success">
                   Stock 1
@@ -107,12 +115,12 @@
         </section>
 
     </div>
-    <!-- Use justify-content utilities to change alignment of flex items on the main axis -->
         
     <hr />
 
-    <section class="row justify-content-center my-4">
+    <footer class="row justify-content-center my-4">
 
+      <!-- 'Company' Details -->
       <div class="col-12 col-sm-6 col-md-4">
         <address>
           <h2>Cool Company, Inc.</h2>
@@ -127,6 +135,8 @@
 
         </address>
       </div>
+
+      <!-- Footer form -->
       <div class="col-12 col-sm-6 col-md-4">
         <h2>Leave a Comment</h2>
         <form>
@@ -142,7 +152,7 @@
         </form>
       </div>
 
-    </section>
+    </footer>
 
   </main>
   </body>
