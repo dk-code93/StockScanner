@@ -1,11 +1,11 @@
-## Stock Scanner
+# Stock Scanner
 
-# Functionality
+## Functionality
 This app searches for and displays stock information.
 
-The user can search for stocks and view current data and relevent news coverage.
+The user can search for stocks to view current data and relevent news coverage.
 
 The user is able to save a 'favorites' list which will persist upon refresh.
 
-# Link
+## Link
 https://buneroskoviche.github.io/StockScanner/
