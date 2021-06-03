@@ -29,14 +29,13 @@
   </head>
   <body>
 
-  <!-- header + navbar -->
   <header class="jumbotron jumbotron-fluid bg-dark text-light">
     
-    <!-- Container for navbar elements -->
+    <!-- Container for header  -->
     <div class="row d-flex justify-content-around">
 
-      <!-- Nav Buttons -->
-      <div id="navbar">
+        <!-- Nav Buttons and title -->
+        <div >
           <h1>Stock Scanner</h1>
           <ul class="nav nav-pills">
             <li class="nav-item mr-2">
@@ -52,14 +51,13 @@
               <a class="nav-link active" href="#">Disabled</a>
             </li>
           </ul>
-      </div>
+        </div>
 
-      <!-- Search field -->
-      <form id="searchForm">
-        <input class="form-control w-20" type="search" placeholder="Search" aria-label="Search" id="searchInput" >
-        <button class="btn btn-outline-success" type="submit" id="searchBtn">Search</button>
-      </form>
-
+        <!-- Search Form -->
+        <form class="form-inline ">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
 
     </div>
     
@@ -80,8 +78,7 @@
         <!-- Container for stock list -->
         <section class="col-4" id="cards">
 
-              <!-- Search results will appear here -->
-              <div class="card">
+              <div class="card mb-3">
                 <h3 class="card-header bg-success">
                   Stock 1
                 </h3>
@@ -115,7 +112,6 @@
         </section>
 
     </div>
-        
     <hr />
 
     <footer class="row justify-content-center my-4">
