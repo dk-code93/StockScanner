@@ -29,15 +29,15 @@
   </head>
   <body>
 
-  <header class="jumbotron jumbotron-fluid bg-dark text-light">
+  <header class="jumbotron jumbotron-fluid morpheus-den-gradient text-light">
 
     <!-- Container for header  -->
     <div class="row d-flex justify-content-around">
 
         <!-- Nav Buttons and title -->
         <nav>
-          <h1>Stock Scanner</h1>
-          <ul class="nav nav-pills">
+          <h1 class="animated fadeInLeft">Stock Scanner</h1>
+          <ul class="nav nav-pills animated fadeInLeft">
             <li class="nav-item mr-2">
               <a class="nav-link active" href="#">Active</a>
             </li>
@@ -54,9 +54,9 @@
         </nav>
 
         <!-- Search Form -->
-        <form class="form-inline">
+        <form class="form-inline mt-5 animated fadeInRight">
           <input id="searchInput" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-          <button id="searchBtn" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          <button id="searchBtn" class="btn my-2 my-sm-0" type="submit">Search</button>
         </form>
 
     </div>
@@ -78,15 +78,15 @@
         <!-- Container for stock list -->
         <section class="col-4" id="cards">
 
-              <div class="card mb-3">
+              <div class="card mb-3 z-depth-4">
                 <h3 class="card-header bg-success">
                   Stock 1
                 </h3>
               <div class="card-header">
                 <ul class="nav nav-tabs card-header-tabs">
-                  <li class="nav-item">
+                  <button class="nav-item">
                     <a class="nav-link active" href="#">Active</a>
-                  </li>
+                  </button>
                   <li class="nav-item">
                     <a class="nav-link" href="#">Link</a>
                   </li>
@@ -107,8 +107,8 @@
               </div>
             
             
-              <div class="card">
-                <h3 class="card-header bg-warning">
+              <div class="card z-depth-4">
+                <h3 class="card-header bg-warning ">
                   Stock 2
                 </h3>
                 <div class="card-header">
