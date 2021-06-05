@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Stock Scanner</title>
     <!-- Font Awesome -->
     <link
       rel="stylesheet"
@@ -76,16 +76,17 @@
 
         <!-- Active selection window -->
         <div class="col-8">
-            <h2>Live Stocks</h2>
-            <div class="jumbotron"></div>
+            <h2>Previous 10-Day Stock Closing Prices</h2>
+            <div id="stockGraph" class="jumbotron">
+            </div>
         </div>
 
         <!-- Container for stock list -->
         <section class="col-4" id="cards">
 
-              <div class="card mb-3 z-depth-4">
+            <div class="card mb-3 z-depth-4">
                 <h3 class="card-header bg-success">
-                  Stock Data
+                  Current Stock Data
                 </h3>
               <div class="card-header">
                 <ul class="nav nav-tabs card-header-tabs">
@@ -105,10 +106,9 @@
                   </p>
                   <button class="btn btn-block btn-info">Learn more.</button>
                 </div>
-              </div>
-            
-            
-              <div class="card">
+            </div>
+
+            <div class="card">
                 <h3 class="card-header bg-warning">
                   Company News
                 </h3>
@@ -134,22 +134,22 @@
                   </p>
                   <button class="btn btn-block btn-info">Learn more.</button>
                 </div>
-              </div>
+            </div>
 
         </section>
 
     </div>
-    <hr />
+</hr>
 
     <footer class="row justify-content-center my-4">
 
       <!-- 'Company' Details -->
       <div class="col-12 col-sm-6 col-md-4">
         <address>
-          <h2>Lorem, ipsum dolor.</h2>
+          <h2>The Unstoppables</h2>
 
           <h5>
-            Call us at <a href="tel:8675309"></a>8675309</a>
+            Call us at <a href="tel:8675309824"></a>(867)530-9824</a>
           </h5>
 
           <h5>
@@ -179,7 +179,7 @@
 
   </main>
 
-   <!-- JQuery -->
+   <!-- jQuery -->
    <script
    type="text/javascript"
    src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
@@ -194,7 +194,9 @@
    type="text/javascript"
    src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"
  ></script>
- <!-- Personal Javascript -->
+<!-- Moment -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+ <!-- Local Javascript -->
 <script src="./assets/js/script.js"></script>
   </body>
 </html>
