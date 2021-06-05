@@ -17,6 +17,8 @@ $(`#searchStock`).keypress(function(event) {
 $(`#searchBtn`).on(`click`, function(event) {
   // Prevent page from clearing data
   event.preventDefault();
+  // Show search history
+  $(`.card`).removeClass(`hide`);
   // Get value stored in search box from user input
   searchSymbol = $(`#searchStock`).val();
 
@@ -29,6 +31,9 @@ $(`#searchBtn`).on(`click`, function(event) {
   // Display company news
   // callStockNews();
 
+  // Creates history list
+  makeList();
+
  // Clear the value of the search box
  searchSymbol = $(`#searchStock`).val(``);
 });
@@ -37,7 +42,7 @@ function callStockData() {
   // Stock Data API URL
   const dataAPI = `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=` + searchSymbol + stockKey;
 
-  // Call Stock API
+  // Call Stock Data API
   $.ajax({
     url: dataAPI,
     method: `GET`
@@ -53,4 +58,13 @@ function callStockData() {
 function stockData(response) {
   //   Display new stock data
   $(`#data`).text(JSON.stringify(response));
+};
+
+// Create Stock History
+function makeList() {
+  // Create list elements with a bootstrap class and text of user entered city
+  const listStock = $(`<li>`).addClass(`list-group-item`).attr(`data-value`, searchSymbol).text(searchSymbol);
+  // Put the listStock content into any list-group class's
+  $(`.list-group`).append(listStock);
+  localStorage.setItem(`list`, listStock);
 };
