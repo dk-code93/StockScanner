@@ -17,6 +17,17 @@ $searchStock.keypress(function(event) {
   } 
 });
 
+// Forces user input in search box to auto-capitalize
+jQuery(document).ready(function($) {
+  $searchStock.keyup(function(event) {
+      const textBox = event.target;
+      const start = textBox.selectionStart;
+      const end = textBox.selectionEnd;
+      textBox.value = textBox.value.charAt(0).toUpperCase() + textBox.value.slice(1).toUpperCase();
+      textBox.setSelectionRange(start, end);
+  })
+});
+
 // On search button click
 $searchBtn.on(`click`, function(event) {
   // Prevent page from clearing data
