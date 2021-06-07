@@ -34,7 +34,7 @@ $searchBtn.on(`click`, function(event) {
   makeList();
 
  // Clear the value of the search box
- searchSymbol = $searchStock.val(``);
+ $searchStock.val(``);
 });
 
 function callGetGraph() {
@@ -73,11 +73,26 @@ function callStockData() {
 // Create Stock History
 function makeList() {
   // Create list elements with a bootstrap class and text of user entered city
-  const listStock = $(`<li>`).addClass(`list-group-item`).attr(`data-value`, searchSymbol).text(searchSymbol);
+  const listStock = $(`<li>`).addClass(`list-group-item`);
+  // Create a button to go into the list item
+  const historyBtn = $(`<button>`).addClass(`btn btn-info`).attr(`type`, `button`).attr(`data-value`, searchSymbol).text(searchSymbol);
+  listStock.append(historyBtn);
   // Put the listStock content into any list-group class's
-  $(`.list-group`).append(listStock);
+  $(`#history`).append(listStock);
   localStorage.setItem(`list`, listStock);
 };
+
+// Click listener for the history buttons searches for the stock
+$(`#history`).on('click', function(event) {
+    const element = event.target;
+    if (element.matches("button")) {
+        searchSymbol = element.getAttribute('data-value');
+        // Display stock graph
+        callGetGraph();
+        // Display stock data
+        callStockData();
+    }
+});
 
 function getGraph(response) {
   // Get the date properties from the API response object
@@ -95,7 +110,6 @@ function getGraph(response) {
       // Add the corresponding date values to an array
       valueArray.unshift(response[`Time Series (Daily)`][`${date}`][`4. close`]);
   }
-  console.log(valueArray);
   // Creates a graph object based on data received
   const graphObj = {
       type: 'line',
@@ -109,6 +123,8 @@ function getGraph(response) {
   }
   // Creates an img html element linked to the graph
   const graphIMG = $(`<img>`).addClass(`img-fluid`).attr(`alt`, `graph`).attr(`src`, `https://quickchart.io/chart?c=${JSON.stringify(graphObj)}`);
+  // Remove old graph
+  $stockGraph.children().remove();
   // Appends the graph to the page
   $stockGraph.append(graphIMG);
 }
