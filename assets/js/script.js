@@ -7,6 +7,19 @@ const stockKey = `&apikey=BF997UXSJ2Q4JW3Y`;
 // Store user's searched stock symbols value
 var searchSymbol = $searchStock.val();
 
+// Array to be used for saving and loading search history
+const historyArray = [];
+// Load search history from local storage and add it to the history list
+const savedHistory = JSON.parse(localStorage.getItem(`list`));
+if (savedHistory) {
+    // Unhide the search history card
+    $(`#historyCard`).removeClass(`hide`);
+    for (let i = 0; i < savedHistory.length; i++) {
+        historyArray.push(savedHistory[i]);
+        makeList(historyArray[i]);
+    }
+}
+
 // Lets user click search button with ENTER key
 // When you press ENTER key within the stock search bar
 $searchStock.keypress(function(event) {
@@ -31,10 +44,14 @@ $searchBtn.on(`click`, function(event) {
   // Display stock data
   callStockData();
   // Creates history list
-  makeList();
+  makeList(searchSymbol);
 
  // Clear the value of the search box
  $searchStock.val(``);
+ // Add the search key to the history array
+ historyArray.push(searchSymbol);
+ // Save the history array to local storage
+ localStorage.setItem(`list`, JSON.stringify(historyArray));
 });
 
 function callGetGraph() {
@@ -71,19 +88,18 @@ function callStockData() {
 };
 
 // Create Stock History
-function makeList() {
+function makeList(string) {
   // Create list elements with a bootstrap class and text of user entered city
   const listStock = $(`<li>`).addClass(`list-group-item`);
-  // Create a button to go into the list item
-  const historyBtn = $(`<button>`).addClass(`btn btn-info`).attr(`type`, `button`).attr(`data-value`, searchSymbol).text(searchSymbol);
+  // Create a button and put it into the list item
+  const historyBtn = $(`<button>`).addClass(`btn btn-info`).attr(`type`, `button`).attr(`data-value`, string).text(string);
   listStock.append(historyBtn);
   // Put the listStock content into any list-group class's
-  $(`#history`).append(listStock);
-  localStorage.setItem(`list`, listStock);
+  $(`#historyList`).append(listStock);
 };
 
 // Click listener for the history buttons searches for the stock
-$(`#history`).on('click', function(event) {
+$(`#historyList`).on('click', function(event) {
     const element = event.target;
     if (element.matches("button")) {
         searchSymbol = element.getAttribute('data-value');
