@@ -1,26 +1,20 @@
-
 .jumbotron-fluid {
-    padding-top: 10px;
-    padding-bottom: 10px;
-  }
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
 
- .card {
+.card {
+  height: 500px;
+}
 
-height: 500px;
-
-
- }
-
-
-
- .nav-pills .nav-item .nav-link {
-
-background-color: rgba(0, 255, 255, 0.5);
-
- }
-
- #searchBtn{
-
+.nav-pills .nav-item .nav-link {
   background-color: rgba(0, 255, 255, 0.5);
+}
 
- }
+#searchBtn{
+  background-color: rgba(0, 255, 255, 0.5);
+}
+
+.hide {
+  display: none;
+}
