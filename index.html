@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Stock Scanner</title>
     <!-- Font Awesome -->
     <link
       rel="stylesheet"
@@ -27,6 +27,7 @@
     />
     <link rel="stylesheet" href="./assets/style.css">
   </head>
+  
   <body>
 
   <header class="jumbotron jumbotron-fluid morpheus-den-gradient text-light">
@@ -51,11 +52,12 @@
               <a class="nav-link active" href="#">Disabled</a>
             </li>
           </ul>
+
         </nav>
 
         <!-- Search Form -->
         <form class="form-inline mt-5 animated fadeInRight">
-          <input id="searchInput" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <input id="searchStock" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
           <button id="searchBtn" class="btn my-2 my-sm-0" type="submit">Search</button>
         </form>
 
@@ -63,81 +65,54 @@
     
   </header>
 
-  <!-- ljower area -->
+  <!-- Lower area -->
   <main class="container">
 
     <!-- Row containing search results and active selection  -->
     <div class="row">
 
         <!-- Active selection window -->
-        <div class="col-8">
-            <h2>Live Stocks</h2>
-            <div id="liveStock" class="jumbotron">
-              <!-- <img class="img-fluid" src="https://quickchart.io/chart?bkg=white&c=%7B%0A%20%20type%3A%20%27line%27%2C%0A%20%20data%3A%20%7B%0A%20%20%20%20labels%3A%20%5B%27Q1%27%2C%20%27Q2%27%2C%20%27Q3%27%2C%20%27Q4%27%5D%2C%0A%20%20%20%20datasets%3A%20%5B%7B%0A%20%20%20%20%20%20label%3A%20%27stock%27%2C%0A%20%20%20%20%20%20data%3A%20%5B40%2C%2080%2C%2090%2C%20180%5D%0A%20%20%20%20%7D%5D%0A%20%20%7D%0A%7D" alt="graph"> -->
-            </div>
+        <div class="col-8 animated fadeInUp">
+            <h2>Previous 10-Day Stock Closing Prices</h2>
+            <div id="stockGraph" class="jumbotron">
+          </div>
         </div>
 
         <!-- Container for stock list -->
-        <section class="col-4" id="cards">
+        <section class="col-4 animated fadeInUp" id="cards">
 
-              <div class="card border-info mb-3 z-depth-4">
-                <h3 class="card-header">
-                  Stock 1
+            <div class="card mb-3 z-depth-4">
+                <h3 class="card-header bg-success">
+                  Current Stock Data
                 </h3>
                 <div class="card-body">
-                  <p class="card-text">
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quo accusantium dolor at, blanditiis rem
-                    quisquam ipsam ipsum. Magnam ut quibusdam facilis consequatur veritatis, ullam molestiae, inventore
-                    neque,
-                    quas obcaecati laborum? Lorem ipsum dolor, sit amet consectetur adipisicing elit. Enim consectetur necessitatibus quasi voluptate magni impedit dolor maiores ullam eaque ipsam inventore officia consequuntur fugiat reiciendis tempora possimus nulla, adipisci repellendus!
+                  <p id="data" class="card-text">
                   </p>
                   <button class="btn btn-block btn-info">Learn more.</button>
                 </div>
-              </div>
-            
-            
-              <!-- <div class="card z-depth-4">
-                <h3 class="card-header bg-warning ">
-                  Stock 2
-                </h3>
-                <div class="card-header">
-                  <ul class="nav nav-tabs card-header-tabs">
-                    <li class="nav-item">
-                      <a class="nav-link active" href="#">Active</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="#">Link</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link disabled" href="#">Disabled</a>
-                    </li>
-                  </ul>
-                </div>
-                <div class="card-body">
-                  <p class="card-text">
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quo accusantium dolor at, blanditiis rem
-                    quisquam ipsam ipsum. Magnam ut quibusdam facilis consequatur veritatis, ullam molestiae, inventore
-                    neque,
-                    quas obcaecati laborum?
-                  </p>
-                  <button class="btn btn-block btn-info">Learn more.</button>
-                </div>
-              </div> -->
+            </div>
+
+             <!-- List Search History  -->
+            <div class="card text-dark hide">
+              <h3>Search History:</h3>
+              <ul id="history" class="list-group list-group-flush">
+              </ul>
+            </div>
 
         </section>
 
     </div>
-    <hr />
+</hr>
 
     <footer class="row justify-content-center my-4">
 
       <!-- 'Company' Details -->
       <div class="col-12 col-sm-6 col-md-4">
         <address>
-          <h2>Lorem, ipsum dolor.</h2>
+          <h2>The Unstoppables</h2>
 
           <h5>
-            Call us at <a href="tel:8675309"></a>8675309</a>
+            Call us at <a href="tel:8675309824"></a>(867)530-9824</a>
           </h5>
 
           <h5>
@@ -166,31 +141,25 @@
     </footer>
 
   </main>
+
+   <!-- jQuery -->
+   <script
+   type="text/javascript"
+   src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+ ></script>
+ <!-- Bootstrap tooltips -->
+ <script
+   type="text/javascript"
+   src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"
+ ></script>
+ <!-- MDB core JavaScript -->
+ <script
+   type="text/javascript"
+   src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"
+ ></script>
+<!-- Moment -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+ <!-- Local Javascript -->
+<script src="./assets/js/script.js"></script>
   </body>
-
-  <!-- JQuery -->
-  <script
-    type="text/javascript"
-    src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
-  ></script>
-  <!-- Bootstrap tooltips -->
-  <script
-    type="text/javascript"
-    src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"
-  ></script>
-  <!-- Bootstrap core JavaScript -->
-  <script
-    type="text/javascript"
-    src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"
-  ></script>
-  <!-- MDB core JavaScript -->
-  <script
-    type="text/javascript"
-    src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"
-  ></script>
-  <!-- JQuery Moment -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-  <!-- Local Script -->
-  <script type="text/javascript" src="./assets/js/script.js"></script>
-
 </html>
