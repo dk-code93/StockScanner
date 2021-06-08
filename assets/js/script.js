@@ -45,8 +45,7 @@ jQuery(document).ready(function($) {
 $searchBtn.on(`click`, function(event) {
   // Prevent page from clearing data
   event.preventDefault();
-  // Show search history
-  $(`.card`).removeClass(`hide`);
+  
   // Get value stored in search box from user input
   searchSymbol = $searchStock.val();
 
@@ -56,12 +55,17 @@ $searchBtn.on(`click`, function(event) {
 
   // Display stock graph
   const graphCheck = getStock();
+  // Check if the stock was found
   if (graphCheck === 404) {
     $searchStock.val(``);
-    $(`#data`).text(`Could not find the stock...`);
+    $(`#modal404`).attr(`tabindex`, 1);
     return;
-  }
-  // Creates history list
+  } 
+
+  // Show search history
+  $(`.card`).removeClass(`hide`);
+
+  // Creates history list button
   makeList(searchSymbol);
 
  // Clear the value of the search box
@@ -77,6 +81,8 @@ $searchBtn.on(`click`, function(event) {
  }
  // Save the history array to local storage
  localStorage.setItem(`list`, JSON.stringify(historyArray));
+
+ return;
 });
 
 function getStock() {
@@ -158,6 +164,7 @@ function displayStock(response) {
    const today = response[`Time Series (Daily)`][`${APIdates[0]}`];
    const stockProperties = Object.keys(today);
    //  Display the current day values in the `Current Stock Data`
+   $(`#data`).removeClass(`hide`);
    for (let i = 0; i < 6; i++) {
      $(`#data`).children().eq(i).children().text(`${today[`${stockProperties[i]}`]}`);
    }
