@@ -54,33 +54,10 @@ $searchBtn.on(`click`, function(event) {
     return; }
 
   // Display stock graph
-  const graphCheck = getStock();
-  // Check if the stock was found
-  if (graphCheck === 404) {
-    $searchStock.val(``);
-    $(`#modal404`).attr(`tabindex`, 1);
-    return;
-  } 
-
-  // Show search history
-  $(`.card`).removeClass(`hide`);
-
-  // Creates history list button
-  makeList(searchSymbol);
+  getStock();
 
  // Clear the value of the search box
  $searchStock.val(``);
- 
- // Add the search key to the history array
- historyArray.push(searchSymbol);
-
- // Once you hit 15 searches, remove the oldest entry
- if (historyArray.length > 15) {
-    historyArray.shift();
-    $(`#historyList`).last().remove();
- }
- // Save the history array to local storage
- localStorage.setItem(`list`, JSON.stringify(historyArray));
 
  return;
 });
@@ -104,6 +81,8 @@ function getStock() {
     } else {
         // Call displayStock function with JSON response
         displayStock(response);
+        // Saves the search history
+        saveData();
     }
   })
 };
@@ -170,4 +149,23 @@ function displayStock(response) {
    }
 
   return;
+}
+
+function saveData() {
+  // Creates history list button
+  makeList(searchSymbol);
+
+  // Show search history
+  $(`.card`).removeClass(`hide`);
+
+  // Add the search key to the history array
+  historyArray.push(searchSymbol);
+
+  // Once you hit 15 searches, remove the oldest entry
+  if (historyArray.length > 15) {
+     historyArray.shift();
+     $(`#historyList`).last().remove();
+  }
+  // Save the history array to local storage
+  localStorage.setItem(`list`, JSON.stringify(historyArray));
 }
