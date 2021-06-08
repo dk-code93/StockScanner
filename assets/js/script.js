@@ -42,7 +42,7 @@ jQuery(document).ready(function($) {
 });
 
 // On search button click
-$searchBtn.on(`click`, function(event) {
+$searchBtn.on(`click`, async function(event) {
   // Prevent page from clearing data
   event.preventDefault();
   
@@ -54,16 +54,12 @@ $searchBtn.on(`click`, function(event) {
     return; }
 
   // Display stock graph
-  const stockCheck = getStock();
-  if (stockCheck === 404) {
-    console.log('not found');
-  } else {
-    // Saves the search history
-    saveData();
-  }
+  const check = await getStock();
 
- // Clear the value of the search box
- $searchStock.val(``);
+  saveData(check);
+
+  // Clear the value of the search box
+  $searchStock.val(``);
 
  return;
 });
@@ -72,7 +68,7 @@ function getStock() {
   // Stock Graph API URL
   const graphAPI = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=` + searchSymbol + `&outputsize=compact` + stockKey;
 
-  $.ajax({
+  return $.ajax({
     url: graphAPI,
     method: `GET`
   }).then(function(response){
@@ -87,8 +83,10 @@ function getStock() {
     } else {
         // Call displayStock function with JSON response
         displayStock(response);
+        return;
     }
-  })
+  });
+
 };
 
 // Create Stock History
@@ -155,21 +153,24 @@ function displayStock(response) {
   return;
 }
 
-function saveData() {
-  // Creates history list button
-  makeList(searchSymbol);
+function saveData(response) {
 
   // Show search history
   $(`.card`).removeClass(`hide`);
 
-  // Add the search key to the history array
-  historyArray.push(searchSymbol);
-
-  // Once you hit 15 searches, remove the oldest entry
-  if (historyArray.length > 15) {
-     historyArray.shift();
-     $(`#historyList`).last().remove();
+  if (response === 404) {
+    console.log('not found');
+  } else {
+    // Creates history list button
+    makeList(searchSymbol);
+    // Add the search key to the history array
+    historyArray.push(searchSymbol);
+    // Once you hit 15 searches, remove the oldest entry
+    if (historyArray.length > 15) {
+       historyArray.shift();
+       $(`#historyList`).last().remove();
+    }
+    // Save the history array to local storage
+    localStorage.setItem(`list`, JSON.stringify(historyArray));
   }
-  // Save the history array to local storage
-  localStorage.setItem(`list`, JSON.stringify(historyArray));
 }
