@@ -40,17 +40,25 @@
           <h1 class="animated fadeInLeft">Stock Scanner</h1>
           <ul class="nav nav-pills animated fadeInLeft">
             <li class="nav-item mr-2">
-              <a class="nav-link active light-blue" href="https://www.marketwatch.com/tools/quotes/lookup.asp" target="_blank">Symbol Lookup</a>
+              <a class="nav-link active light-blue" 
+              href="https://www.marketwatch.com/tools/quotes/lookup.asp" 
+              target="_blank" 
+              data-mdb-toggle="tooltip" 
+              title="Not sure what you're looking for? Use this handy website.">Ticker Symbol Lookup</a>
             </li>
             <li class="nav-item mx-2">
-              <a class="nav-link active light-blue" href="https://www.marketwatch.com/" target="_blank">Market News</a>
+              <a class="nav-link active light-blue" 
+              href="https://www.marketwatch.com/" 
+              target="_blank"
+              data-mdb-toggle="tooltip" 
+              title="Check out this site for some relevant stock news.">Market News</a>
             </li>
           </ul>
         </nav>
 
         <!-- Search Form -->
         <form class="form-inline mt-5 animated fadeInRight">
-          <input id="searchStock" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <input id="searchStock" class="form-control mr-sm-2" type="search" placeholder="Enter Ticker Symbol" aria-label="Search">
           <button id="searchBtn" class="btn my-2 my-sm-0 light-blue" type="submit">Search</button>
         </form>
 
