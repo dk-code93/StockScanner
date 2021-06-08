@@ -50,22 +50,36 @@ $searchBtn.on(`click`, function(event) {
   // Get value stored in search box from user input
   searchSymbol = $searchStock.val();
 
+  // End the function if nothing is entered 
+  if (!searchSymbol) {
+    return; }
+
   // Display stock graph
-  callGetGraph();
-  // Display stock data
-  callStockData();
+  const graphCheck = getStock();
+  if (graphCheck === 404) {
+    $searchStock.val(``);
+    $(`#data`).text(`Could not find the stock...`);
+    return;
+  }
   // Creates history list
   makeList(searchSymbol);
 
  // Clear the value of the search box
  $searchStock.val(``);
+ 
  // Add the search key to the history array
  historyArray.push(searchSymbol);
+
+ // Once you hit 15 searches, remove the oldest entry
+ if (historyArray.length > 15) {
+    historyArray.shift();
+    $(`#historyList`).last().remove();
+ }
  // Save the history array to local storage
  localStorage.setItem(`list`, JSON.stringify(historyArray));
 });
 
-function callGetGraph() {
+function getStock() {
   // Stock Graph API URL
   const graphAPI = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=` + searchSymbol + `&outputsize=compact` + stockKey;
 
@@ -76,37 +90,24 @@ function callGetGraph() {
     // All Graph API returned 
     console.log(response);
 
-    // Call getGraph function with JSON response
-    getGraph(response);
-  })
-};
-
-function callStockData() {
-  // Stock Data API URL
-  const dataAPI = `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=` + searchSymbol + stockKey;
-
-  // Call Stock Data API
-  $.ajax({
-    url: dataAPI,
-    method: `GET`
-  }).then(function(response){
-    // All data API returned 
-    console.log(response);
-
-    // Display new stock data
-    $(`#data`).text(JSON.stringify(response));
+    // Check for an error message in the response
+    if (response[`Error Message`]) {
+        // If an error message is found, end the function
+        console.log(`oopsies`);
+        return 404;
+    } else {
+        // Call displayStock function with JSON response
+        displayStock(response);
+    }
   })
 };
 
 // Create Stock History
 function makeList(string) {
-  // Create list elements with a bootstrap class and text of user entered city
-  const listStock = $(`<li>`).addClass(`list-group-item`);
   // Create a button and put it into the list item
   const historyBtn = $(`<button>`).addClass(`btn btn-info`).attr(`type`, `button`).attr(`data-value`, string).text(string);
-  listStock.append(historyBtn);
   // Put the listStock content into any list-group class's
-  $(`#historyList`).append(listStock);
+  $(`#historyList`).prepend(historyBtn);
 };
 
 // Click listener for the history buttons searches for the stock
@@ -115,13 +116,11 @@ $(`#historyList`).on('click', function(event) {
     if (element.matches("button")) {
         searchSymbol = element.getAttribute('data-value');
         // Display stock graph
-        callGetGraph();
-        // Display stock data
-        callStockData();
+        getStock();
     }
 });
 
-function getGraph(response) {
+function displayStock(response) {
   // Get the date properties from the API response object
   const APIdates = Object.keys(response[`Time Series (Daily)`]);
   // Create an array of the last 10 dates
@@ -154,4 +153,14 @@ function getGraph(response) {
   $stockGraph.children().remove();
   // Appends the graph to the page
   $stockGraph.append(graphIMG);
+
+   // Put the stock values in an array
+   const today = response[`Time Series (Daily)`][`${APIdates[0]}`];
+   const stockProperties = Object.keys(today);
+   //  Display the current day values in the `Current Stock Data`
+   for (let i = 0; i < 6; i++) {
+     $(`#data`).children().eq(i).children().text(`${today[`${stockProperties[i]}`]}`);
+   }
+
+  return;
 }
