@@ -3,6 +3,22 @@
   padding-bottom: 10px;
 }
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+.nav-pills .nav-item .nav-link {
+  background-color: rgba(0, 255, 255, 0.5);
+}
+
+#searchBtn{
+  background-color: rgba(0, 255, 255, 0.5);
+=======
+#card-1 {
+  height: 500px;
+>>>>>>> main
+}
+
+=======
+>>>>>>> main
 .hide {
   display: none;
 }
