@@ -7,14 +7,6 @@
   height: 500px;
 }
 
-.nav-pills .nav-item .nav-link {
-  background-color: rgba(0, 255, 255, 0.5);
-}
-
-#searchBtn{
-  background-color: rgba(0, 255, 255, 0.5);
-}
-
 .hide {
   display: none;
 }
