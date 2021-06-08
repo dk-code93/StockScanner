@@ -160,6 +160,10 @@ function saveData(response) {
 
   if (response === 404) {
     console.log('not found');
+    return;
+  } else if (historyArray.includes(searchSymbol)) {
+    console.log('already there');
+    return;
   } else {
     // Creates history list button
     makeList(searchSymbol);
