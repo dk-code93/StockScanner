@@ -7,6 +7,19 @@ const stockKey = `&apikey=BF997UXSJ2Q4JW3Y`;
 // Store user's searched stock symbols value
 var searchSymbol = $searchStock.val();
 
+// Array to be used for saving and loading search history
+const historyArray = [];
+// Load search history from local storage and add it to the history list
+const savedHistory = JSON.parse(localStorage.getItem(`list`));
+if (savedHistory) {
+    // Unhide the search history card
+    $(`#historyCard`).removeClass(`hide`);
+    for (let i = 0; i < savedHistory.length; i++) {
+        historyArray.push(savedHistory[i]);
+        makeList(historyArray[i]);
+    }
+}
+
 // Lets user click search button with ENTER key
 // When you press ENTER key within the stock search bar
 $searchStock.keypress(function(event) {
@@ -32,23 +45,24 @@ jQuery(document).ready(function($) {
 $searchBtn.on(`click`, function(event) {
   // Prevent page from clearing data
   event.preventDefault();
-  // Show search history
-  $(`.card`).removeClass(`hide`);
+  
   // Get value stored in search box from user input
   searchSymbol = $searchStock.val();
 
+  // End the function if nothing is entered 
+  if (!searchSymbol) {
+    return; }
+
   // Display stock graph
-  callGetGraph();
-  // Display stock data
-  callStockData();
-  // Creates history list
-  makeList();
+  getStock();
 
  // Clear the value of the search box
- searchSymbol = $searchStock.val(``);
+ $searchStock.val(``);
+
+ return;
 });
 
-function callGetGraph() {
+function getStock() {
   // Stock Graph API URL
   const graphAPI = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=` + searchSymbol + `&outputsize=compact` + stockKey;
 
@@ -59,38 +73,39 @@ function callGetGraph() {
     // All Graph API returned 
     console.log(response);
 
-    // Call getGraph function with JSON response
-    getGraph(response);
-  })
-};
-
-function callStockData() {
-  // Stock Data API URL
-  const dataAPI = `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=` + searchSymbol + stockKey;
-
-  // Call Stock Data API
-  $.ajax({
-    url: dataAPI,
-    method: `GET`
-  }).then(function(response){
-    // All data API returned 
-    console.log(response);
-
-    // Display new stock data
-    $(`#data`).text(JSON.stringify(response));
+    // Check for an error message in the response
+    if (response[`Error Message`]) {
+        // If an error message is found, end the function
+        console.log(`oopsies`);
+        return 404;
+    } else {
+        // Call displayStock function with JSON response
+        displayStock(response);
+        // Saves the search history
+        saveData();
+    }
   })
 };
 
 // Create Stock History
-function makeList() {
-  // Create list elements with a bootstrap class and text of user entered city
-  const listStock = $(`<li>`).addClass(`list-group-item`).attr(`data-value`, searchSymbol).text(searchSymbol);
+function makeList(string) {
+  // Create a button and put it into the list item
+  const historyBtn = $(`<button>`).addClass(`btn btn-info`).attr(`type`, `button`).attr(`data-value`, string).text(string);
   // Put the listStock content into any list-group class's
-  $(`.list-group`).append(listStock);
-  localStorage.setItem(`list`, listStock);
+  $(`#historyList`).prepend(historyBtn);
 };
 
-function getGraph(response) {
+// Click listener for the history buttons searches for the stock
+$(`#historyList`).on('click', function(event) {
+    const element = event.target;
+    if (element.matches("button")) {
+        searchSymbol = element.getAttribute('data-value');
+        // Display stock graph
+        getStock();
+    }
+});
+
+function displayStock(response) {
   // Get the date properties from the API response object
   const APIdates = Object.keys(response[`Time Series (Daily)`]);
   // Create an array of the last 10 dates
@@ -106,7 +121,6 @@ function getGraph(response) {
       // Add the corresponding date values to an array
       valueArray.unshift(response[`Time Series (Daily)`][`${date}`][`4. close`]);
   }
-  console.log(valueArray);
   // Creates a graph object based on data received
   const graphObj = {
       type: 'line',
@@ -120,6 +134,38 @@ function getGraph(response) {
   }
   // Creates an img html element linked to the graph
   const graphIMG = $(`<img>`).addClass(`img-fluid`).attr(`alt`, `graph`).attr(`src`, `https://quickchart.io/chart?c=${JSON.stringify(graphObj)}`);
+  // Remove old graph
+  $stockGraph.children().remove();
   // Appends the graph to the page
   $stockGraph.append(graphIMG);
+
+   // Put the stock values in an array
+   const today = response[`Time Series (Daily)`][`${APIdates[0]}`];
+   const stockProperties = Object.keys(today);
+   //  Display the current day values in the `Current Stock Data`
+   $(`#data`).removeClass(`hide`);
+   for (let i = 0; i < 6; i++) {
+     $(`#data`).children().eq(i).children().text(`${today[`${stockProperties[i]}`]}`);
+   }
+
+  return;
+}
+
+function saveData() {
+  // Creates history list button
+  makeList(searchSymbol);
+
+  // Show search history
+  $(`.card`).removeClass(`hide`);
+
+  // Add the search key to the history array
+  historyArray.push(searchSymbol);
+
+  // Once you hit 15 searches, remove the oldest entry
+  if (historyArray.length > 15) {
+     historyArray.shift();
+     $(`#historyList`).last().remove();
+  }
+  // Save the history array to local storage
+  localStorage.setItem(`list`, JSON.stringify(historyArray));
 }

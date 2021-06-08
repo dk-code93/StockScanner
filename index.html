@@ -46,10 +46,6 @@
               <a class="nav-link active" href="https://www.marketwatch.com/">Market News</a>
             </li>
           </ul>
-            <!-- List Search History  -->
-            <div class="card text-dark hide">
-                <ul class="list-group list-group-flush">Search History:</ul>
-            </div>
         </nav>
 
         <!-- Search Form -->
@@ -88,9 +84,22 @@
                   Current Stock Data
                 </h3>
                 <div class="card-body">
-                  <p id="data" class="card-text">
-                  </p>
+                  <ul id="data" class="list-group list-group-flush hide">
+                    <li class="list-group-item">Open: <span id="1. open"></span></li>
+                    <li class="list-group-item">High: <span id="2. high"></span></li>
+                    <li class="list-group-item">Low: <span id="3. low"></span></li>
+                    <li class="list-group-item">Close: <span id="4. close"></span></li>
+                    <li class="list-group-item">Adjusted Close: <span id="5. adjusted close"></span></li>
+                    <li class="list-group-item">Volume: <span id="6. volume"></span></li>
+                  </ul>
                 </div>
+            </div>
+
+             <!-- List Search History  -->
+            <div id="historyCard" class="card text-dark hide">
+              <h3 class="card-header bg-success">Search History:</h3>
+              <div id="historyList" class="d-flex flex-wrap">
+              </div>
             </div>
 
         </section>
@@ -117,6 +126,35 @@
       </div>
 
     </footer>
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="modal404"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Uh oh...</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-mdb-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">We couldn't find that one.</div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">
+              Let's try that again
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
 
   </main>
 
