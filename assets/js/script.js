@@ -54,7 +54,13 @@ $searchBtn.on(`click`, function(event) {
     return; }
 
   // Display stock graph
-  getStock();
+  const stockCheck = getStock();
+  if (stockCheck === 404) {
+    console.log('not found');
+  } else {
+    // Saves the search history
+    saveData();
+  }
 
  // Clear the value of the search box
  $searchStock.val(``);
@@ -81,8 +87,6 @@ function getStock() {
     } else {
         // Call displayStock function with JSON response
         displayStock(response);
-        // Saves the search history
-        saveData();
     }
   })
 };
