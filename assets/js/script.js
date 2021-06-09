@@ -159,7 +159,14 @@ function saveData(response) {
   $(`.card`).removeClass(`hide`);
 
   if (response === 404) {
-    console.log('not found');
+    // Remove old graph
+    $stockGraph.children().remove();
+    // Create a message
+    const error1 = $(`<h1>`).text(`404`);
+    const error2 = $(`<h2>`).text(`We couldn't find that stock...`);
+    const error3 = $(`<p>`).text(`Try using the "Ticker Symbol Lookup" link to find a symbol`);
+    // Append message to jumbotron
+    $stockGraph.append(error1).append(error2).append(error3);
     return;
   } else if (historyArray.includes(searchSymbol)) {
     console.log('already there');
