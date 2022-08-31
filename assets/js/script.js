@@ -146,7 +146,7 @@ function displayStock(response) {
    const stockProperties = Object.keys(today);
    //  Display the current day values in the `Current Stock Data`
    $(`#data`).removeClass(`hide`);
-   for (let i = 0; i < 6; i++) {
+   for (let i = 0; i < 5; i++) {
      $(`#data`).children().eq(i).children().text(`${today[`${stockProperties[i]}`]}`);
    }
 
