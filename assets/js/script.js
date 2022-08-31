@@ -3,7 +3,7 @@ const $searchBtn = $(`#searchBtn`);
 const $searchStock = $(`#searchStock`);
 const $stockGraph = $(`#stockGraph`);
 // API Key
-const stockKey = `&apikey=BF997UXSJ2Q4JW3Y`;
+const stockKey = `&apikey=0GM6A49EJPD85AOD`;
 // Store user's searched stock symbols value
 var searchSymbol = $searchStock.val();
 
@@ -66,7 +66,7 @@ $searchBtn.on(`click`, async function(event) {
 
 function getStock() {
   // Stock Graph API URL
-  const graphAPI = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=` + searchSymbol + `&outputsize=compact` + stockKey;
+  const graphAPI = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=` + searchSymbol + `&outputsize=compact` + stockKey;
 
   return $.ajax({
     url: graphAPI,
@@ -154,12 +154,15 @@ function displayStock(response) {
 }
 
 function saveData(response) {
-
-  // Show search history
-  $(`.card`).removeClass(`hide`);
-
   if (response === 404) {
-    console.log('not found');
+    // Remove old graph
+    $stockGraph.children().remove();
+    // Create a message
+    const error1 = $(`<h1>`).text(`404`);
+    const error2 = $(`<h2>`).text(`We couldn't find that stock...`);
+    const error3 = $(`<p>`).text(`Try using the "Ticker Symbol Lookup" link to find a symbol`);
+    // Append message to jumbotron
+    $stockGraph.append(error1).append(error2).append(error3);
     return;
   } else if (historyArray.includes(searchSymbol)) {
     console.log('already there');
