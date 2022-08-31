@@ -66,7 +66,7 @@ $searchBtn.on(`click`, async function(event) {
 
 function getStock() {
   // Stock Graph API URL
-  const graphAPI = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=` + searchSymbol + `&outputsize=compact` + stockKey;
+  const graphAPI = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=` + searchSymbol + `&outputsize=compact` + stockKey;
 
   return $.ajax({
     url: graphAPI,
