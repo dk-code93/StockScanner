@@ -1,6 +1,6 @@
 # Stock Scanner
 
-[Access it here!](https://buneroskoviche.github.io/StockScanner/)
+[Access it here!](https://dk-code93.github.io/StockScanner/)
 
 ## Functionality
 This app searches for and displays stock information.
